@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:16:28 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:07:40 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 17:59:11 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,29 +134,6 @@
 #  define C_KEY				8
 #  define ESC_KEY			53
 #  define USE_KEY			3
-
-# endif
-
-# ifdef _WIN32
-
-#  define OSX 0
-#  define LINUX 1
-
-#  define ARROW_UP_KEY		1073741906
-#  define ARROW_DOWN_KEY	1073741905
-#  define ARROW_LEFT_KEY	1073741904
-#  define ARROW_RIGHT_KEY	1073741903
-#  define SHOOT_KEY			1073742053
-
-#  define FORWARD_KEY		122
-#  define BACKWARD_KEY		115
-#  define LEFT_KEY			113
-#  define RIGHT_KEY			100
-#  define CTRL_KEY			1073742048
-#  define ALT_KEY			1073742050
-#  define C_KEY				99
-#  define ESC_KEY			27
-#  define USE_KEY			102
 
 # endif
 

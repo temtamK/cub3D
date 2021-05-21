@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:21:28 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 05:59:56 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 18:06:51 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	stop_sounds(void)
 	return (system("(" KILL_COMMAND " " PLAYER " )" OPTIONS));
 }
 
-int	 play_sound(char *path)
+int	play_sound(char *path)
 {
 	char	command[1000];
 

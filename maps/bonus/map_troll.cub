@@ -1,15 +1,15 @@
-R 1920 1080 
+R 1920 1080
 C 255,0,0
 F 69,69,69
 
-NO	pics/brick.xpm
-SO	pics/brick.xpm
-EA	pics/brick.xpm
-WE	pics/brick.xpm
+NO	pics/bush.xpm
+SO	pics/bush.xpm
+EA	pics/bush.xpm
+WE	pics/bush.xpm
 S 	pics/burger.xpm
 DO	pics/door_open.xpm
 DC	pics/door_close.xpm
-EN	pics/zombie.xpm
+EN	pics/togepi.xpm
 
 
 11111111111111111111111111111111111111111
