@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:18:09 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 04:18:40 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:34:10 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void		init_sprite_drawing(t_sprite_drawer *draw, t_camera *cam,
 	/ draw->transform_y);
 	draw->sprite_height = fabs((int)draw->screen->height / (draw->transform_y));
 	draw->half_sprite_height = draw->sprite_height / 2;
-	get_stripe_size(draw);
+	get_sprite_size(draw);
 	init_sprite_texture(draw, text);
 }

@@ -6,7 +6,7 @@
 #    By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 00:54:15 by taemkim           #+#    #+#              #
-#    Updated: 2021/05/20 17:13:09 by taemkim          ###   ########.fr        #
+#    Updated: 2021/05/21 13:35:28 by taemkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ SRC = $(addprefix $(DIRSRC)/, \
 			garbage_collection/garbage_collector.c \
 \
 			$(addprefix events/,\
-			loop.c  handlers.c keyboard_handler.c keyboard.c mouvements.c ennemies.c \
+			loop.c  handlers.c keyboard_handler.c keyboard.c movements.c ennemies.c \
 			mouse.c collisions.c handlers_2.c $(OS_DIR)/mouse_move.c \
 			$(OS_DIR)/sound.c singletons.c\
 	)\

@@ -6,12 +6,12 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:16:13 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:39:16 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:32:53 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef libftprintf_H
-# define libftprintf_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 # define HEX_BASE_UP "0123456789ABCDEF"
 # define HEX_BASE_LOW "0123456789abcdef"
 # define DEC_BASE "0123456789"

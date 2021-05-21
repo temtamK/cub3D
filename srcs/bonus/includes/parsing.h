@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:15:58 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:39:16 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:30:49 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include "structs/structs.h"
-# include "../libftprintf/libftprintf.h"
+# include "../libft/libftprintf.h"
 # include "garbage_collection.h"
 # include "settings.h"
 

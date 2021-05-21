@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 00:04:03 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:52:36 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:24:12 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int		ft_putstr_fd(char *s, int fd)
 {
 	if (!s || fd < 0)
-		return ;
+		return (0);
 	write(fd, s, ft_strlen(s));
 }

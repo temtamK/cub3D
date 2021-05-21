@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:20:38 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:04:56 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:34:53 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int		loop_handler(t_vars *vars)
 			redraw(vars);
 	}
 	if (vars->frame_ready)
-		rekresh(vars);
+		refresh(vars);
 	return (0);
 }
