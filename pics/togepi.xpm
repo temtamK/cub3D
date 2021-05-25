@@ -110,7 +110,7 @@ static char *bbc3edb62f4a487af14aa355909f8ad7LYUT5W91AE6yIlU0[] = {
 "-. c #04EC02",
 ";. c #0DEC02",
 ":. c #02F402",
-">. c None",
+">. c #000001",
 ",. c #73817E",
 "<. c #9A845C",
 "1. c #BF8152",

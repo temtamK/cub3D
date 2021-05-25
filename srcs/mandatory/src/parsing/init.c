@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:11:00 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/19 20:46:39 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/25 14:45:05 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int			init_cam(t_camera *cam, t_spawn *spawn)
 	(t_plane){0, 0.66}};
 	cam_switcher[1] = (t_camera){0.0, 0.0, 1.0, 0.0, SPEED, TURN_SPEED,
 	(t_plane){0, -0.66}};
-	cam_switcher[2] = (t_camera){0.0, 0.0, 0.0, -1.0, SPEED, TURN_SPEED,
-	(t_plane){-0.66, 0.0}};
-	cam_switcher[3] = (t_camera){0, 0, 0, 1.0, SPEED, TURN_SPEED,
+	cam_switcher[2] = (t_camera){0.0, 0.0, 0.0, 1.0, SPEED, TURN_SPEED,
 	(t_plane){0.66, 0.0}};
+	cam_switcher[3] = (t_camera){0, 0, 0, -1.0, SPEED, TURN_SPEED,
+	(t_plane){-0.66, 0.0}};
 	i = 0;
 	while (SPAWN_CHARS[i] && SPAWN_CHARS[i] != spawn->dir)
 		i++;

@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:19:09 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 04:19:10 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/25 14:56:56 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int				get_wall_side(t_vars *vars, t_ray *ray)
 	corner = get_corner(atan2((double)ray->y - (double)vars->cam.y,
 						(double)ray->x - (double)vars->cam.x) * 180.0 / PI);
 	if (corner == 36.0)
-		return ((ray->side) ? WEST : NORTH);
-	else if (corner == 145.0)
 		return ((ray->side) ? WEST : SOUTH);
+	else if (corner == 145.0)
+		return ((ray->side) ? WEST : NORTH);
 	else if (corner == -38.99999)
-		return ((ray->side) ? EAST : NORTH);
-	else if (corner == -142.5)
 		return ((ray->side) ? EAST : SOUTH);
+	else if (corner == -142.5)
+		return ((ray->side) ? EAST : NORTH);
 	ft_putendl_fd("Weird", 2);
 	return (4);
 }

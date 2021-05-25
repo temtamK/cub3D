@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:16:34 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 04:16:35 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/25 14:45:04 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int			init_cam(t_camera *cam, t_spawn *spawn, t_screen *s)
 	.turn_speed = TURN_SPEED, .plane = (t_plane){0, ratio}};
 	cam_switcher[1] = (t_camera){.hp = 100, .dir_x = 1, .speed = SPEED,
 	.turn_speed = TURN_SPEED, .plane = (t_plane){0, -ratio}};
-	cam_switcher[2] = (t_camera){.hp = 100, .dir_y = -1.0, .speed = SPEED,
-	.turn_speed = TURN_SPEED, .plane = (t_plane){-ratio, 0.0}};
-	cam_switcher[3] = (t_camera){.hp = 100, .dir_y = 1.0, .speed = SPEED,
+	cam_switcher[2] = (t_camera){.hp = 100, .dir_y = 1.0, .speed = SPEED,
 	.turn_speed = TURN_SPEED, .plane = (t_plane){ratio, 0.0}};
+	cam_switcher[3] = (t_camera){.hp = 100, .dir_y = -1.0, .speed = SPEED,
+	.turn_speed = TURN_SPEED, .plane = (t_plane){-ratio, 0.0}};
 	while (SPAWN_CHARS[i] && SPAWN_CHARS[i] != spawn->dir)
 		i++;
 	if (SPAWN_CHARS[i])
