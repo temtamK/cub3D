@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/19 20:46:39 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 01:39:26 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,20 @@ int	read_cub(char *path, t_list **alst)
 	return (len);
 }
 
+void	map_size(t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = -1;
+	while (map->array[++y])
+		if ((size_t)x < ft_strlen(map->array[y]))
+			x = ft_strlen(map->array[y]);
+	map->x = x;
+	map->y = y;
+}
+
 int	load_cub(char *path, t_vars *vars)
 {
 	t_list	*cub __attribute__((cleanup(free_cub)));
@@ -121,10 +135,11 @@ int	load_cub(char *path, t_vars *vars)
 		return (error);
 	if (!(vars->map.array = parse_array(cub, len)))
 		return (MAP_ERROR);
-	if (find_spawn(vars->map.array, &(vars->spawn)) != SUCCESS_CODE)
+	map_size(&(vars->map));
+	if (find_spawn(&(vars->map), &(vars->spawn)) != SUCCESS_CODE)
 		return (MAP_ERROR);
 	if (parse_sprites(vars, vars->map.array, &(vars->num_sprites))
 		!= SUCCESS_CODE)
 		return (MAP_ERROR);
-	return (check_borders(vars->map.array));
+	return (check_borders(&(vars->map)));
 }

@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/25 13:08:51 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 01:39:30 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	format_map_line(char *line)
 {
 	int error;
 	int i;
+	int j;
 
 	i = -1;
 	error = SUCCESS_CODE;
@@ -24,12 +25,13 @@ static int	format_map_line(char *line)
 	while (line[++i])
 	{
 		if (ft_isspace(line[i]))
-			line[i] = WALL;
-		if (line[0] != WALL || !ft_strchr(VALID_MAP_CHARS, line[i]))
+			i++;
+		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
 			return (MAP_ERROR);
 	}
-	if (!i || line[i - 1] != WALL)
-		return (MAP_ERROR);
+	j = ft_strlen(line) - 1;
+	while (ft_strchr(line[j], WHITESPACES))
+		j--;
 	return (error);
 }
 
@@ -62,26 +64,49 @@ char		**parse_array(t_list *lst, int len)
 	return (array);
 }
 
-int			find_spawn(char **map, t_spawn *spawn)
+int		check_surrounding(t_map *map, int x, int y, char *find)
+{
+	// if (y > 0 && x > 0 && ft_strchr(find, map->array[y - 1][x - 1]))
+	// 	return (0);
+	if (y > 0 && ft_strchr(find, map->array[y - 1][x]))
+		return (0);
+	// else if (y > 0 && x < (map->x - 2) &&
+	// 		ft_strchr(find, map->array[y - 1][x + 1]))
+	// 	return (0);
+	else if (x < (map->x - 2) && ft_strchr(find, map->array[y][x + 1]))
+		return (0);
+	// else if (y < (map->y - 2) && x < (map->x - 2) &&
+	// 		ft_strchr(find, map->array[y + 1][x + 1]))
+	// 	return (0);
+	else if (y < (map->y - 2) && ft_strchr(find, map->array[y + 1][x]))
+		return (0);
+	// else if (y < (map->y - 2) && x > 0 &&
+	// 		ft_strchr(find, map->array[y + 1][x - 1]))
+	// 	return (0);
+	else if (x > 0 && ft_strchr(find, map->array[y][x - 1]))
+		return (0);
+	return (1);
+}
+
+int			find_spawn(t_map *map, t_spawn *spawn)
 {
 	char	*spawn_ptr;
 	char	*last_ptr;
 	int		x;
 
 	x = -1;
-	*spawn = (t_spawn){-1, -1, 0};
-	while (map && map[++x])
+	*spawn = (t_spawn){-1, -1, 0, 0, 0};
+	while (map && map->array[++x])
 	{
-		if ((spawn_ptr = ft_setchr(map[x], SPAWN_CHARS))
-						!= (last_ptr = ft_setrchr(map[x], SPAWN_CHARS)))
+		if ((spawn_ptr = ft_setchr(map->array[x], SPAWN_CHARS))
+						!= (last_ptr = ft_setrchr(map->array[x], SPAWN_CHARS)))
 			return (MAP_ERROR);
 		else if (spawn_ptr)
 		{
-			if (spawn->x != -1 && spawn->y != -1)
-				return (MAP_ERROR);
-			*spawn = (t_spawn){x + 0.5, spawn_ptr - map[x] + 0.5,
-								map[x][spawn_ptr - map[x]]};
-			map[(int)(spawn->x - 0.5)][(int)(spawn->y - 0.5)] = VOID;
+			*spawn = (t_spawn){x + 0.5, spawn_ptr - map->array[x] + 0.5,
+			map->array[x][spawn_ptr - map->array[x]],
+			spawn_ptr - map->array[x], x};
+			map->array[(int)(spawn->x - 0.5)][(int)(spawn->y - 0.5)] = VOID;
 		}
 	}
 	if (spawn->x <= 0 || spawn->y <= 0 || !ft_strchr(SPAWN_CHARS, spawn->dir))
@@ -89,7 +114,7 @@ int			find_spawn(char **map, t_spawn *spawn)
 	return (SUCCESS_CODE);
 }
 
-int			check_borders(char **map)
+int			check_borders(t_map *map)
 {
 	int	y;
 	int	x;
@@ -97,19 +122,22 @@ int			check_borders(char **map)
 	y = -1;
 	if (!map)
 		return (MAP_ERROR);
-	while (map[++y])
+	while (map->array[++y])
 	{
 		x = -1;
-		if ((map[y][0] != WALL)
-			|| map[y][ft_strlen(map[y]) - 1] != WALL)
-			return (MAP_ERROR);
-		while (y > 0 && map[y][++x] && map[y + 1])
-			if (map[y][x] == VOID && (x >= (int)ft_strlen(map[y - 1])
-									|| x >= (int)ft_strlen(map[y + 1])))
+		while (y > 0 && map->array[y][++x] && map->array[y + 1])
+		{
+			if (map->array[y][x] == VOID &&
+			(x >= (int)ft_strlen(map->array[y - 1]) ||
+			x >= (int)ft_strlen(map->array[y + 1])))
 				return (MAP_ERROR);
+			if (ft_strchr(VOID_CHARS, map->array[y][x]))
+				if (!check_surrounding(map, x, y, WHITESPACES))
+					return (MAP_ERROR);
+		}
 	}
-	if (ft_setchr(map[0], VOID_CHARS) || y <= 0
-		|| ft_setchr(map[y - 1], VOID_CHARS))
+	if (ft_setchr(map->array[0], VOID_CHARS) || y <= 0
+		|| ft_setchr(map->array[y - 1], VOID_CHARS))
 		return (MAP_ERROR);
 	return (SUCCESS_CODE);
 }

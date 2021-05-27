@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:45:05 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 07:07:32 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/27 23:48:11 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int		parse_color(char *line);
 /*
 **  Cub3D specific functions
 */
-int		check_borders(char **map);
-int		find_spawn(char **map, t_spawn *spawn);
+int		check_borders(t_map *map);
+int		find_spawn(t_map *map, t_spawn *spawn);
 char	**parse_array(t_list *lst, int len);
 int		init_vars(char *path, t_vars *vars, int save);
 int		load_cub(char *path, t_vars *vars);
