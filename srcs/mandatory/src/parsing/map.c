@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/28 01:39:30 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 13:06:57 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 static int	format_map_line(char *line)
 {
-	int error;
 	int i;
 	int j;
 
-	i = -1;
-	error = SUCCESS_CODE;
+	i = 0;
 	if (!line || !*line)
 		return ((line) ? SUCCESS_CODE : MAP_ERROR);
-	while (line[++i])
+	while (ft_strchr(WHITESPACES, line[i]))
+		i++;
+	if (line[i] != WALL)
+		return (MAP_ERROR);
+	while (line[i++])
 	{
 		if (ft_isspace(line[i]))
 			i++;
 		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
 			return (MAP_ERROR);
 	}
-	j = ft_strlen(line) - 1;
-	while (ft_strchr(line[j], WHITESPACES))
-		j--;
-	return (error);
+	j = ft_strlen(line);
+	while (ft_strchr(WHITESPACES, line[--j]))
+		line[j] = '\0';
+	if (line[j] != WALL)
+		return (MAP_ERROR);
+	return (SUCCESS_CODE);
 }
 
 char		**parse_array(t_list *lst, int len)
@@ -136,8 +140,8 @@ int			check_borders(t_map *map)
 					return (MAP_ERROR);
 		}
 	}
-	if (ft_setchr(map->array[0], VOID_CHARS) || y <= 0
-		|| ft_setchr(map->array[y - 1], VOID_CHARS))
+	if (ft_setchr(map->array[0], MAP_CHECKER) || y <= 0
+		|| ft_setchr(map->array[y - 1], MAP_CHECKER))
 		return (MAP_ERROR);
 	return (SUCCESS_CODE);
 }

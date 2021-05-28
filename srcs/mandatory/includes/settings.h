@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:45:18 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:39:16 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 13:04:23 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 # define SHADOW_MODE	0
 # define SPAWN_CHARS		"NSEW"
 # define VOID_CHARS         "NSEW02"
+# define MAP_CHECKER		"NSEW02 "
 # define WALL               '1'
 # define VOID               '0'
-# define WHITESPACES		"\t\010\011\012\013 "
+# define WHITESPACES		"\t\010\011\012\013\032"
 
 # define SPEED				0.04
 # define TURN_SPEED			SPEED
