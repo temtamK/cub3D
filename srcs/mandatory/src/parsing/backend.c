@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/28 01:39:26 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 14:04:43 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,23 @@ void	map_size(t_map *map)
 	map->y = y;
 }
 
+int		duplicate_map(t_map *map)
+{
+	int	i;
+
+	if (!(map->tmp = malloc(sizeof(char *) * map->y)))
+		return (MALLOC_ERROR);
+	i = 0;
+	while (i < map->y)
+	{
+		if (!(map->tmp[i] = malloc(sizeof(char *) * (map->x + 1))))
+			return (MALLOC_ERROR);
+		ft_memcpy(map->tmp[i], map->array[i], map->x + 1);
+		i++;
+	}
+	return (SUCCESS_CODE);
+}
+
 int	load_cub(char *path, t_vars *vars)
 {
 	t_list	*cub __attribute__((cleanup(free_cub)));
@@ -141,5 +158,10 @@ int	load_cub(char *path, t_vars *vars)
 	if (parse_sprites(vars, vars->map.array, &(vars->num_sprites))
 		!= SUCCESS_CODE)
 		return (MAP_ERROR);
-	return (check_borders(&(vars->map)));
+	if (duplicate_map(&(vars->map)) != SUCCESS_CODE)
+		return (MALLOC_ERROR);
+	check_borders(&(vars->map), vars->spawn.pos_x, vars->spawn.pos_y);
+	if (vars->map.result == -3)
+		return (MAP_ERROR);
+	return (SUCCESS_CODE);
 }

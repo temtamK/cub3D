@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:46:39 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/28 01:05:26 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 13:59:44 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct	s_map
 	int			x;
 	int			y;
 	char		**array;
+	char		**tmp;
+	int			result;
 }				t_map;
 
 #endif

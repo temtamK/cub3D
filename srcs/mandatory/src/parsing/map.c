@@ -6,11 +6,38 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/28 13:06:57 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/28 14:30:29 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+// static int	format_map_line(char *line)
+// {
+// 	int i;
+// 	int j;
+
+// 	i = 0;
+// 	if (!line || !*line)
+// 		return ((line) ? SUCCESS_CODE : MAP_ERROR);
+// 	while (ft_strchr(WHITESPACES, line[i]))
+// 		i++;
+// 	if (line[i] != WALL)
+// 		return (MAP_ERROR);
+// 	while (line[i++])
+// 	{
+// 		if (ft_isspace(line[i]))
+// 			i++;
+// 		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
+// 			return (MAP_ERROR);
+// 	}
+// 	j = ft_strlen(line);
+// 	while (ft_strchr(WHITESPACES, line[--j]))
+// 		line[j] = '\0';
+// 	if (line[j] != WALL)
+// 		return (MAP_ERROR);
+// 	return (SUCCESS_CODE);
+// }
 
 static int	format_map_line(char *line)
 {
@@ -21,21 +48,17 @@ static int	format_map_line(char *line)
 	if (!line || !*line)
 		return ((line) ? SUCCESS_CODE : MAP_ERROR);
 	while (ft_strchr(WHITESPACES, line[i]))
-		i++;
-	if (line[i] != WALL)
-		return (MAP_ERROR);
+		line[i] = '0';
 	while (line[i++])
 	{
 		if (ft_isspace(line[i]))
-			i++;
+			line[i] = '0';
 		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
 			return (MAP_ERROR);
 	}
 	j = ft_strlen(line);
 	while (ft_strchr(WHITESPACES, line[--j]))
-		line[j] = '\0';
-	if (line[j] != WALL)
-		return (MAP_ERROR);
+		line[i] = '0';
 	return (SUCCESS_CODE);
 }
 
@@ -118,30 +141,49 @@ int			find_spawn(t_map *map, t_spawn *spawn)
 	return (SUCCESS_CODE);
 }
 
-int			check_borders(t_map *map)
-{
-	int	y;
-	int	x;
+// int			check_borders(t_map *map)
+// {
+// 	int	y;
+// 	int	x;
 
-	y = -1;
-	if (!map)
-		return (MAP_ERROR);
-	while (map->array[++y])
+// 	y = -1;
+// 	if (!map)
+// 		return (MAP_ERROR);
+// 	while (map->array[++y])
+// 	{
+// 		x = -1;
+// 		while (y > 0 && map->array[y][++x] && map->array[y + 1])
+// 		{
+// 			if (map->array[y][x] == VOID &&
+// 			(x >= (int)ft_strlen(map->array[y - 1]) ||
+// 			x >= (int)ft_strlen(map->array[y + 1])))
+// 				return (MAP_ERROR);
+// 			if (ft_strchr(VOID_CHARS, map->array[y][x]))
+// 				if (!check_surrounding(map, x, y, MAP_CHECKER))
+// 					return (MAP_ERROR);
+// 		}
+// 	}
+// 	if (ft_setchr(map->array[0], VOID_CHARS) || y <= 0
+// 		|| ft_setchr(map->array[y - 1], VOID_CHARS))
+// 		return (MAP_ERROR);
+// 	return (SUCCESS_CODE);
+// }
+void    check_borders(t_map *map, int x, int y)
+{
+	if (!(ft_strchr("NSEW", map->tmp[y][x])))
+		map->tmp[y][x] = 'F';
+	if (!(x) || !(y) || y == (map->y - 1) ||
+		x == (map->x - 1) || !check_surrounding(map, x, y, "\0"))
 	{
-		x = -1;
-		while (y > 0 && map->array[y][++x] && map->array[y + 1])
-		{
-			if (map->array[y][x] == VOID &&
-			(x >= (int)ft_strlen(map->array[y - 1]) ||
-			x >= (int)ft_strlen(map->array[y + 1])))
-				return (MAP_ERROR);
-			if (ft_strchr(VOID_CHARS, map->array[y][x]))
-				if (!check_surrounding(map, x, y, WHITESPACES))
-					return (MAP_ERROR);
-		}
+		map->result = -3;
+		return ;
 	}
-	if (ft_setchr(map->array[0], MAP_CHECKER) || y <= 0
-		|| ft_setchr(map->array[y - 1], MAP_CHECKER))
-		return (MAP_ERROR);
-	return (SUCCESS_CODE);
+    if (y > 0 && ft_strchr("0234", map->tmp[y - 1][x]))
+        check_borders(map, x, y - 1);
+    if ((y < (map->y - 1)) && ft_strchr("0234", map->tmp[y + 1][x]))
+        check_borders(map, x, y + 1);
+    if ((x < (map->x - 1)) && ft_strchr("0234", map->tmp[y][x + 1]))
+        check_borders(map, x + 1, y);
+    if (x > 0 && ft_strchr("0234", map->tmp[y][x - 1]))
+        check_borders(map, x - 1, y);
 }
