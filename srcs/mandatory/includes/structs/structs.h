@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:46:58 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/19 20:13:40 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 10:44:34 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_vars
 	double			*z_buffer;
 	int				redraw;
 	int				seen_sprite;
+	int				parser;
 }					t_vars;
 
 typedef struct		s_bih

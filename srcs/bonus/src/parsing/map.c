@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:19:30 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 04:19:30 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 14:22:41 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 static int	format_map_line(char *line)
 {
-	int error;
 	int i;
+	int j;
 
-	i = -1;
-	error = SUCCESS_CODE;
+	i = 0;
 	if (!line || !*line)
 		return ((line) ? SUCCESS_CODE : MAP_ERROR);
-	while (line[++i])
+	while (ft_strchr(WHITESPACES, line[i]))
+		line[i] = '0';
+	while (line[i++])
 	{
 		if (ft_isspace(line[i]))
-			line[i] = WALL;
-		if (line[0] != WALL || !ft_strchr(VALID_MAP_CHARS, line[i]))
+			line[i] = '0';
+		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
 			return (MAP_ERROR);
 	}
-	if (!i || line[i - 1] != WALL)
-		return (MAP_ERROR);
-	return (error);
+	j = ft_strlen(line);
+	while (ft_strchr(WHITESPACES, line[--j]))
+		line[i] = '0';
+	return (SUCCESS_CODE);
 }
 
 char		**parse_array(t_list *lst, int len)
@@ -62,26 +64,25 @@ char		**parse_array(t_list *lst, int len)
 	return (array);
 }
 
-int			find_spawn(char **map, t_spawn *spawn)
+int			find_spawn(t_map *map, t_spawn *spawn)
 {
 	char	*spawn_ptr;
 	char	*last_ptr;
 	int		x;
 
 	x = -1;
-	*spawn = (t_spawn){-1, -1, 0};
-	while (map && map[++x])
+	*spawn = (t_spawn){-1, -1, 0, 0, 0};
+	while (map && map->array[++x])
 	{
-		if ((spawn_ptr = ft_setchr(map[x], SPAWN_CHARS))
-						!= (last_ptr = ft_setrchr(map[x], SPAWN_CHARS)))
+		if ((spawn_ptr = ft_setchr(map->array[x], SPAWN_CHARS))
+						!= (last_ptr = ft_setrchr(map->array[x], SPAWN_CHARS)))
 			return (MAP_ERROR);
 		else if (spawn_ptr)
 		{
-			if (spawn->x != -1 && spawn->y != -1)
-				return (MAP_ERROR);
-			*spawn = (t_spawn){.x = x + 0.5, .y = spawn_ptr - map[x] + 0.5,
-								.dir = map[x][spawn_ptr - map[x]]};
-			map[(int)(spawn->x - 0.5)][(int)(spawn->y - 0.5)] = VOID;
+			*spawn = (t_spawn){x + 0.5, spawn_ptr - map->array[x] + 0.5,
+			map->array[x][spawn_ptr - map->array[x]],
+			spawn_ptr - map->array[x], x};
+			map->array[(int)(spawn->x - 0.5)][(int)(spawn->y - 0.5)] = VOID;
 		}
 	}
 	if (spawn->x <= 0 || spawn->y <= 0 || !ft_strchr(SPAWN_CHARS, spawn->dir))
@@ -89,27 +90,22 @@ int			find_spawn(char **map, t_spawn *spawn)
 	return (SUCCESS_CODE);
 }
 
-int			check_borders(char **map)
+void		check_borders(t_map *map, int x, int y)
 {
-	int	y;
-	int	x;
-
-	y = -1;
-	if (!map)
-		return (MAP_ERROR);
-	while (map[++y])
+	if (!(ft_strchr("NSEW", map->tmp[y][x])))
+		map->tmp[y][x] = 'F';
+	if (!(x) || !(y) || y == (map->y - 1) ||
+		x == (map->x - 1) || !check_surrounding(map, x, y, "\0"))
 	{
-		x = -1;
-		if ((map[y][0] != WALL)
-			|| map[y][ft_strlen(map[y]) - 1] != WALL)
-			return (MAP_ERROR);
-		while (y > 0 && map[y][++x] && map[y + 1])
-			if (map[y][x] == VOID && (x >= (int)ft_strlen(map[y - 1])
-									|| x >= (int)ft_strlen(map[y + 1])))
-				return (MAP_ERROR);
+		map->result = -3;
+		return ;
 	}
-	if (ft_setchr(map[0], VOID_CHARS) || y <= 0
-		|| ft_setchr(map[y - 1], VOID_CHARS))
-		return (MAP_ERROR);
-	return (SUCCESS_CODE);
+	if (y > 0 && ft_strchr("0234", map->tmp[y - 1][x]))
+		check_borders(map, x, y - 1);
+	if ((y < (map->y - 1)) && ft_strchr("0234", map->tmp[y + 1][x]))
+		check_borders(map, x, y + 1);
+	if ((x < (map->x - 1)) && ft_strchr("0234", map->tmp[y][x + 1]))
+		check_borders(map, x + 1, y);
+	if (x > 0 && ft_strchr("0234", map->tmp[y][x - 1]))
+		check_borders(map, x - 1, y);
 }

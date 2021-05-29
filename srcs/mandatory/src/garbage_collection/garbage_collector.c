@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:45:54 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 06:39:16 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 13:46:12 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	free_vars(t_vars *vars)
 	if (vars->mlx && vars->img2[1].img)
 		mlx_destroy_image(vars->mlx, vars->img2[1].img);
 	free_split(&(vars->map.array));
+	free_split(&(vars->map.tmp));
 	free_textures(&(vars->text));
 	free(vars->sprites);
 	free(vars->z_buffer);

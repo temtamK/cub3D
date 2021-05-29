@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:19:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/19 20:19:22 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 14:33:33 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct	s_spawn
 	double	x;
 	double	y;
 	char	dir;
+	int		pos_x;
+	int		pos_y;
 }				t_spawn;
 
 typedef struct	s_map
@@ -66,6 +68,8 @@ typedef struct	s_map
 	int			x;
 	int			y;
 	char		**array;
+	char		**tmp;
+	int			result;
 }				t_map;
 
 #endif

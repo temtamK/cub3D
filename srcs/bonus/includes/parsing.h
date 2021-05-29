@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:15:58 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/21 13:30:49 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 14:39:35 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@
 # define CONF_FILE_EXTENSION ".cub"
 # define WIN_NAME "cub3D"
 # define STDERR 2
+# define PARSER_R 0x00001
+# define PARSER_NO 0x00002
+# define PARSER_SO 0x00004
+# define PARSER_EA 0x00008
+# define PARSER_WE 0x00010
+# define PARSER_S 0x00020
+# define PARSER_F 0x00040
+# define PARSER_C 0x00080
+# define PARSER_DC 0x00100
+# define PARSER_EN 0x00200
+# define PARSER_DO 0x00400
 
 /*
 **  IMAGE PARSING
@@ -53,14 +64,17 @@ int		img_to_text(t_data *data, t_texture *text);
 */
 
 int		check_resolution(void *mlx, int *width, int *height);
-int		parse_resolution(char *line, t_screen *screen);
-int		parse_color(char *line);
+int		parse_resolution(char *line, t_vars *vars);
+int		parse_color(char *line, t_vars *vars);
 
 /*
 **  Cub3D specific functions
 */
-int		check_borders(char **map);
-int		find_spawn(char **map, t_spawn *spawn);
+void	map_size(t_map *map);
+int		check_surrounding(t_map *map, int x, int y, char *find);
+int		duplicate_map(t_map *map);
+void	check_borders(t_map *map, int x, int y);
+int		find_spawn(t_map *map, t_spawn *spawn);
 char	**parse_array(t_list *lst, int len);
 int		init_vars(char *path, t_vars *vars, int save);
 int		load_cub(char *path, t_vars *vars);

@@ -6,7 +6,7 @@
 #    By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 00:54:04 by taemkim           #+#    #+#              #
-#    Updated: 2021/05/20 07:06:58 by taemkim          ###   ########.fr        #
+#    Updated: 2021/05/29 14:30:20 by taemkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ SRC = $(addprefix $(DIRSRC)/, \
 			main.c \
 \
 			$(addprefix parsing/,\
-			backend.c  init.c parsing.c images.c map.c sprites_parsing.c) \
+			backend.c  init.c resolution.c images.c map.c sprites_parsing.c \
+			color.c map_utils.c) \
 \
 			raycasting/raycast.c raycasting/walls.c\
 \

@@ -1,57 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 04:19:26 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 04:19:26 by taemkim          ###   ########.fr       */
+/*   Created: 2021/05/18 14:24:16 by taemkim           #+#    #+#             */
+/*   Updated: 2021/05/29 14:38:31 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-static int	get_parsed_res(char **split, t_screen *screen)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (split[++i])
-	{
-		if (i > 1)
-			return (RESOLUTION_ERROR);
-		j = -1;
-		while (split[i][++j])
-		{
-			if (!ft_isdigit(split[i][j]))
-				return (RESOLUTION_ERROR);
-			if (j > 9 || (j == 9 && split[i][0] > 2))
-			{
-				screen->width = INT_MAX;
-				screen->height = INT_MAX;
-				return (SUCCESS_CODE);
-			}
-		}
-	}
-	screen->width = ft_atoi(split[0]);
-	screen->height = ft_atoi(split[1]);
-	return (SUCCESS_CODE);
-}
-
-int			parse_resolution(char *line, t_screen *screen)
-{
-	char	**split __attribute__((cleanup(free_split)));
-
-	if (!(split = ft_split(line, ' ')))
-		return (MALLOC_ERROR);
-	if (get_parsed_res(split, screen) != SUCCESS_CODE)
-		return (RESOLUTION_ERROR);
-	if (screen->width <= 0 || screen->height <= 0)
-		return (RESOLUTION_ERROR);
-	return (SUCCESS_CODE);
-}
 
 static int	check_color(char *line, unsigned char *dst)
 {
@@ -70,7 +29,7 @@ static int	check_color(char *line, unsigned char *dst)
 	nbr = ft_atoi(trimmed);
 	if (nbr < 0 || nbr > 255)
 		return (COLOR_ERROR);
-	*dst = (unsigned char)nbr;
+	*dst = (unsigned char)(nbr);
 	return (SUCCESS_CODE);
 }
 
@@ -89,17 +48,36 @@ static int	count_char(char *str, char c)
 	return (count);
 }
 
-int			parse_color(char *line)
+int			return_color(t_vars *vars, char *line, unsigned char rgb[3])
+{
+	if (!ft_strncmp(line, "F ", 2) && !(vars->parser & PARSER_F))
+	{
+		vars->parser |= PARSER_F;
+		vars->floor_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+		return (SUCCESS_CODE);
+	}
+	else if (!ft_strncmp(line, "C ", 2) && !(vars->parser & PARSER_C))
+	{
+		vars->parser |= PARSER_C;
+		vars->roof_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+		return (SUCCESS_CODE);
+	}
+	return (COLOR_ERROR);
+}
+
+int			parse_color(char *line, t_vars *vars)
 {
 	char			**split __attribute__((cleanup(free_split)));
+	char			*n_line;
 	int				i;
 	int				error;
 	unsigned char	rgb[3];
 
 	split = NULL;
-	if (count_char(line, ',') != 2)
+	n_line = line + 2;
+	if (count_char(n_line, ',') != 2)
 		return (COLOR_ERROR);
-	if (!(split = ft_split(line, ',')))
+	if (!(split = ft_split(n_line, ',')))
 		return (MALLOC_ERROR);
 	i = -1;
 	while (split[++i])
@@ -111,5 +89,5 @@ int			parse_color(char *line)
 	}
 	if (i != 3)
 		return (COLOR_ERROR);
-	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	return (return_color(vars, line, rgb));
 }

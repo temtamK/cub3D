@@ -6,38 +6,11 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/28 14:30:29 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 13:44:05 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-// static int	format_map_line(char *line)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	if (!line || !*line)
-// 		return ((line) ? SUCCESS_CODE : MAP_ERROR);
-// 	while (ft_strchr(WHITESPACES, line[i]))
-// 		i++;
-// 	if (line[i] != WALL)
-// 		return (MAP_ERROR);
-// 	while (line[i++])
-// 	{
-// 		if (ft_isspace(line[i]))
-// 			i++;
-// 		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
-// 			return (MAP_ERROR);
-// 	}
-// 	j = ft_strlen(line);
-// 	while (ft_strchr(WHITESPACES, line[--j]))
-// 		line[j] = '\0';
-// 	if (line[j] != WALL)
-// 		return (MAP_ERROR);
-// 	return (SUCCESS_CODE);
-// }
 
 static int	format_map_line(char *line)
 {
@@ -91,30 +64,6 @@ char		**parse_array(t_list *lst, int len)
 	return (array);
 }
 
-int		check_surrounding(t_map *map, int x, int y, char *find)
-{
-	// if (y > 0 && x > 0 && ft_strchr(find, map->array[y - 1][x - 1]))
-	// 	return (0);
-	if (y > 0 && ft_strchr(find, map->array[y - 1][x]))
-		return (0);
-	// else if (y > 0 && x < (map->x - 2) &&
-	// 		ft_strchr(find, map->array[y - 1][x + 1]))
-	// 	return (0);
-	else if (x < (map->x - 2) && ft_strchr(find, map->array[y][x + 1]))
-		return (0);
-	// else if (y < (map->y - 2) && x < (map->x - 2) &&
-	// 		ft_strchr(find, map->array[y + 1][x + 1]))
-	// 	return (0);
-	else if (y < (map->y - 2) && ft_strchr(find, map->array[y + 1][x]))
-		return (0);
-	// else if (y < (map->y - 2) && x > 0 &&
-	// 		ft_strchr(find, map->array[y + 1][x - 1]))
-	// 	return (0);
-	else if (x > 0 && ft_strchr(find, map->array[y][x - 1]))
-		return (0);
-	return (1);
-}
-
 int			find_spawn(t_map *map, t_spawn *spawn)
 {
 	char	*spawn_ptr;
@@ -141,34 +90,7 @@ int			find_spawn(t_map *map, t_spawn *spawn)
 	return (SUCCESS_CODE);
 }
 
-// int			check_borders(t_map *map)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = -1;
-// 	if (!map)
-// 		return (MAP_ERROR);
-// 	while (map->array[++y])
-// 	{
-// 		x = -1;
-// 		while (y > 0 && map->array[y][++x] && map->array[y + 1])
-// 		{
-// 			if (map->array[y][x] == VOID &&
-// 			(x >= (int)ft_strlen(map->array[y - 1]) ||
-// 			x >= (int)ft_strlen(map->array[y + 1])))
-// 				return (MAP_ERROR);
-// 			if (ft_strchr(VOID_CHARS, map->array[y][x]))
-// 				if (!check_surrounding(map, x, y, MAP_CHECKER))
-// 					return (MAP_ERROR);
-// 		}
-// 	}
-// 	if (ft_setchr(map->array[0], VOID_CHARS) || y <= 0
-// 		|| ft_setchr(map->array[y - 1], VOID_CHARS))
-// 		return (MAP_ERROR);
-// 	return (SUCCESS_CODE);
-// }
-void    check_borders(t_map *map, int x, int y)
+void		check_borders(t_map *map, int x, int y)
 {
 	if (!(ft_strchr("NSEW", map->tmp[y][x])))
 		map->tmp[y][x] = 'F';
@@ -178,12 +100,12 @@ void    check_borders(t_map *map, int x, int y)
 		map->result = -3;
 		return ;
 	}
-    if (y > 0 && ft_strchr("0234", map->tmp[y - 1][x]))
-        check_borders(map, x, y - 1);
-    if ((y < (map->y - 1)) && ft_strchr("0234", map->tmp[y + 1][x]))
-        check_borders(map, x, y + 1);
-    if ((x < (map->x - 1)) && ft_strchr("0234", map->tmp[y][x + 1]))
-        check_borders(map, x + 1, y);
-    if (x > 0 && ft_strchr("0234", map->tmp[y][x - 1]))
-        check_borders(map, x - 1, y);
+	if (y > 0 && ft_strchr("0234", map->tmp[y - 1][x]))
+		check_borders(map, x, y - 1);
+	if ((y < (map->y - 1)) && ft_strchr("0234", map->tmp[y + 1][x]))
+		check_borders(map, x, y + 1);
+	if ((x < (map->x - 1)) && ft_strchr("0234", map->tmp[y][x + 1]))
+		check_borders(map, x + 1, y);
+	if (x > 0 && ft_strchr("0234", map->tmp[y][x - 1]))
+		check_borders(map, x - 1, y);
 }
