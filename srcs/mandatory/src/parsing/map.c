@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 13:44:05 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 15:39:18 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void		check_borders(t_map *map, int x, int y)
 	if (!(x) || !(y) || y == (map->y - 1) ||
 		x == (map->x - 1) || !check_surrounding(map, x, y, "\0"))
 	{
+		free_split(&(map->tmp));
 		map->result = -3;
 		return ;
 	}
