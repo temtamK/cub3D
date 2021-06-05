@@ -18,7 +18,7 @@ HEADERS_PATH = ./includes/
 
 INCLUDES = -I$(HEADERS_PATH)
 
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -O3
 RM = rm -rf
 
 DIR = $(shell pwd)

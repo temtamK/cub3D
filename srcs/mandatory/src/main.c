@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:54:32 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/19 20:46:39 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/04 16:36:04 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ int			main(int argc, char **argv)
 	hooks(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop(vars.mlx);
+	leave(&vars);
 }

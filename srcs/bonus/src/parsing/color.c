@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:24:16 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 14:38:29 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/05/30 14:23:24 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ int			return_color(t_vars *vars, char *line, unsigned char rgb[3])
 	{
 		vars->parser |= PARSER_F;
 		vars->floor_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+		vars->floor_color = (vars->floor_color == 0x1) ? 0 : vars->floor_color;
 		return (SUCCESS_CODE);
 	}
 	else if (!ft_strncmp(line, "C ", 2) && !(vars->parser & PARSER_C))
 	{
 		vars->parser |= PARSER_C;
 		vars->roof_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+		vars->roof_color = (vars->roof_color == 0x1) ? 0 : vars->roof_color;
 		return (SUCCESS_CODE);
 	}
 	return (COLOR_ERROR);

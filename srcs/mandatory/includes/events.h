@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:44:32 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/19 20:29:56 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/05 14:32:25 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "settings.h"
 # include "frontend.h"
 
-# define T_BUFF_SIZE		5
+# define T_BUFF_SIZE		4
 # define S_BUFF_SIZE		1
 
 # ifdef __linux__
@@ -100,6 +100,8 @@ int		alt_handler(t_vars *vars);
 void	turn(t_vars *vars, double angle);
 int		turn_right_handler(t_vars *vars);
 int		turn_left_handler(t_vars *vars);
+
+int		leave(t_vars *vars);
 
 /*
 ** EVENT DEFINITION

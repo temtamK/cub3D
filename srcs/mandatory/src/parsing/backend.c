@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 13:40:32 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/05 14:28:58 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	parser_check(t_vars *vars, char *line)
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", 0};
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", 0};
 	static int	parser_type[] = {PARSER_NO, PARSER_SO, PARSER_WE,
-								PARSER_EA, PARSER_S, 0};
+								PARSER_EA, 0};
 	int			i;
 
 	i = -1;
-	if (ft_strnstr(line, "R ", 2) || !(vars->parser & PARSER_R))
+	if (ft_strnstr(line, "R ", 2) && !(vars->parser & PARSER_R))
 		return (parse_resolution(line + 2, vars));
 	else if (ft_strnstr(line, "F ", 2) || !(vars->parser & PARSER_F)
 			|| ft_strnstr(line, "C ", 2) || !(vars->parser & PARSER_C))
-		return (parse_color(line, vars));
+			return (parse_color(line, vars));
 	else
 		while (text_type[++i])
 			if (ft_strnstr(line, text_type[i], 2) &&
@@ -56,6 +56,11 @@ int	get_conf(t_vars *vars, char *line)
 				vars->parser |= parser_type[i];
 				return (SUCCESS_CODE);
 			}
+	if (!vars->game_screen.height || !vars->game_screen.width)
+	{
+		vars->game_screen.width = 1280;
+		vars->game_screen.height = 800;
+	}
 	return (parser_check(vars, line));
 }
 
@@ -81,7 +86,7 @@ int	parse_config(t_list *cub, t_vars *vars)
 	}
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
-	vars->text_paths[5] = NULL;
+	vars->text_paths[4] = NULL;
 	return (SUCCESS_CODE);
 }
 

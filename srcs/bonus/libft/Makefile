@@ -6,7 +6,7 @@
 #    By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 00:48:16 by taemkim           #+#    #+#              #
-#    Updated: 2021/05/20 06:54:54 by taemkim          ###   ########.fr        #
+#    Updated: 2021/05/30 14:24:21 by taemkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -g3
+CFLAGS = -Wall -Wextra -Werror -g3
 
 RM = rm -rf
 

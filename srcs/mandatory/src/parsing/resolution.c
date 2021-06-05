@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:24:16 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 13:31:41 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/05 14:26:30 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			parse_resolution(char *line, t_vars *vars)
 		return (MALLOC_ERROR);
 	if (get_parsed_res(split, &(vars->game_screen)) != SUCCESS_CODE)
 		return (RESOLUTION_ERROR);
-	if (vars->game_screen.width <= 0 || vars->game_screen.height <= 0)
+	if (vars->game_screen.width < 0 || vars->game_screen.height < 0)
 		return (RESOLUTION_ERROR);
 	vars->parser |= PARSER_R;
 	return (SUCCESS_CODE);
