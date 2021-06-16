@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:19:37 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 14:32:49 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/15 22:29:46 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_vars
 	t_texture		gun;
 	t_texture		flash;
 	t_spawn			spawn;
+	t_minimap		minimap;
 	int				floor_color;
 	int				roof_color;
 	char			*text_paths[T_BUFF_SIZE + 1];
@@ -61,6 +62,7 @@ typedef struct		s_vars
 	double			pitch;
 	double			pos_z;
 	int				parser;
+	int				test;
 }					t_vars;
 
 typedef struct		s_bih

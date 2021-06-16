@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:19:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 14:33:33 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/16 12:52:20 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,15 @@ typedef struct	s_map
 	char		**tmp;
 	int			result;
 }				t_map;
+
+typedef struct		s_minimap
+{
+	int			scale;
+	int			activate;
+	int			x1;
+	int			x2;
+	int			y1;
+	int			y2;
+}					t_minimap;
 
 #endif

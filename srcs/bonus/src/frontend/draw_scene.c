@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:20:13 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/20 04:20:14 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/16 13:33:35 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		draw_scene(t_vars *vars)
 		init_drawer(&draw, &ray, vars->text[ray.w_num].height);
 		draw_col(vars, &draw);
 	}
+	ft_minimap(vars);
 	cast_sprites(vars->sprites, &(vars->cam), vars);
 }
 

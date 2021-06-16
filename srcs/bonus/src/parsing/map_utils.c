@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/29 14:22:36 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/16 13:29:57 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,11 @@ int		duplicate_map(t_map *map)
 {
 	int	i;
 
-	if (!(map->tmp = malloc(sizeof(char *) * map->y)))
+	if (!(map->tmp = malloc(sizeof(char *) * (map->y + 1))))
 		return (MALLOC_ERROR);
-	i = 0;
-	while (i < map->y)
-	{
-		if (!(map->tmp[i] = malloc(sizeof(char *) * (map->x + 1))))
-			return (MALLOC_ERROR);
-		ft_memcpy(map->tmp[i], map->array[i], map->x + 1);
-		i++;
-	}
+	i = -1;
+	while (++i < map->y)
+		map->tmp[i] = ft_strdup(map->array[i]);
+	map->tmp[i] = NULL;
 	return (SUCCESS_CODE);
 }

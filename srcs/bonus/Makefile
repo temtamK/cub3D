@@ -6,7 +6,7 @@
 #    By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 00:54:15 by taemkim           #+#    #+#              #
-#    Updated: 2021/05/29 14:40:04 by taemkim          ###   ########.fr        #
+#    Updated: 2021/06/15 21:55:24 by taemkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_PATH = ./includes/
 
 INCLUDES = -I$(HEADERS_PATH)
 
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address
 RM = rm -rf
 
 DIR = $(shell pwd)
@@ -69,7 +69,7 @@ SRC = $(addprefix $(DIRSRC)/, \
 			raycasting/raycast.c raycasting/walls.c\
 \
 			$(addprefix frontend/,\
-			colors_handling.c frontend.c draw_scene.c)\
+			colors_handling.c frontend.c draw_scene.c minimap.c)\
 \
 			$(addprefix sprites/,\
 			sprites_sort.c  init_sprites.c sprites.c)\
