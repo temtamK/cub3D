@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/05/30 14:23:39 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:07:33 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		check_borders(t_map *map, int x, int y)
 	if (!(ft_strchr("NSEW", map->tmp[y][x])))
 		map->tmp[y][x] = 'F';
 	if (!(x) || !(y) || y == (map->y - 1) ||
-		x == (map->x - 1) || !check_surrounding(map, x, y, "\0"))
+		x == (map->x - 1) || !(check_surrounding(map, x, y)))
 	{
 		map->result = -3;
 		return ;
