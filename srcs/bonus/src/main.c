@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:05:21 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/16 03:34:05 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:30:55 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int			main(int argc, char **argv)
 		free_vars(&vars);
 		return (0);
 	}
-	// draw_scene(&vars);
 	hooks(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	play_sound(MUSIC_PATH);

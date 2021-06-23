@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:19:50 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/05 14:38:52 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:44:21 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ int	parser_check(t_vars *vars, char *line)
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "DC", "EN", "DO",
-								0};
-	static int	parser_type[] = {PARSER_NO, PARSER_SO, PARSER_WE,
-								PARSER_EA, PARSER_S,
-								PARSER_DC, PARSER_EN, PARSER_DO, 0};
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "DC", "EN", "DO"};
+	static int	parser_type[] = {PARSER_NO, PARSER_SO, PARSER_WE, PARSER_EA,
+								PARSER_S, PARSER_DC, PARSER_EN, PARSER_DO, 0};
 	int			i;
 
 	i = -1;
@@ -58,11 +56,10 @@ int	get_conf(t_vars *vars, char *line)
 				vars->parser |= parser_type[i];
 				return (SUCCESS_CODE);
 			}
-	if (!vars->game_screen.height || !vars->game_screen.width)
-	{
+	if (!vars->game_screen.height)
 		vars->game_screen.width = 1280;
+	if (!vars->game_screen.width)
 		vars->game_screen.height = 800;
-	}
 	return (parser_check(vars, line));
 }
 

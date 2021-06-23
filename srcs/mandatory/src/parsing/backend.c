@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/05 14:28:58 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:30:36 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_conf(t_vars *vars, char *line)
 		return (parse_resolution(line + 2, vars));
 	else if (ft_strnstr(line, "F ", 2) || !(vars->parser & PARSER_F)
 			|| ft_strnstr(line, "C ", 2) || !(vars->parser & PARSER_C))
-			return (parse_color(line, vars));
+		return (parse_color(line, vars));
 	else
 		while (text_type[++i])
 			if (ft_strnstr(line, text_type[i], 2) &&
@@ -56,11 +56,10 @@ int	get_conf(t_vars *vars, char *line)
 				vars->parser |= parser_type[i];
 				return (SUCCESS_CODE);
 			}
-	if (!vars->game_screen.height || !vars->game_screen.width)
-	{
+	if (!vars->game_screen.height)
 		vars->game_screen.width = 1280;
+	if (!vars->game_screen.width)
 		vars->game_screen.height = 800;
-	}
 	return (parser_check(vars, line));
 }
 

@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:19:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/16 12:52:20 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:45:39 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct	s_map
 	int			result;
 }				t_map;
 
-typedef struct		s_minimap
+typedef struct	s_minimap
 {
 	int			scale;
 	int			activate;
@@ -80,6 +80,6 @@ typedef struct		s_minimap
 	int			x2;
 	int			y1;
 	int			y2;
-}					t_minimap;
+}				t_minimap;
 
 #endif

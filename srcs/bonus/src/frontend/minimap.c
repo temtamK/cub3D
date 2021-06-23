@@ -6,13 +6,13 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 14:40:35 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/16 13:35:44 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:32:10 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frontend.h"
 
-void	draw_square(t_vars *vars, t_minimap pos, int color)
+void			draw_square(t_vars *vars, t_minimap pos, int color)
 {
 	int	i;
 	int	j;
@@ -68,7 +68,7 @@ static void		render_minimap(t_vars *vars, t_map *map, int bool)
 	}
 }
 
-void	init_minimap(t_vars *vars)
+void			init_minimap(t_vars *vars)
 {
 	int bigest_side;
 	int scale;
@@ -81,7 +81,8 @@ void	init_minimap(t_vars *vars)
 	}
 	else
 		vars->minimap.activate = 1;
-	bigest_side = (vars->game_screen.width < vars->game_screen.height) ? vars->game_screen.width : vars->game_screen.height;
+	bigest_side = (vars->game_screen.width < vars->game_screen.height) ?
+					vars->game_screen.width : vars->game_screen.height;
 	if (vars->map.x < 14 || vars->map.y < 14)
 		bigest_side /= 11;
 	else
