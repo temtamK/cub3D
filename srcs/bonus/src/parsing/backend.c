@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 04:19:50 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/23 15:44:21 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:14:41 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	parser_check(t_vars *vars, char *line)
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "DC", "EN", "DO"};
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ",
+								"DC", "EN", "DO", 0};
 	static int	parser_type[] = {PARSER_NO, PARSER_SO, PARSER_WE, PARSER_EA,
 								PARSER_S, PARSER_DC, PARSER_EN, PARSER_DO, 0};
 	int			i;
@@ -56,10 +57,6 @@ int	get_conf(t_vars *vars, char *line)
 				vars->parser |= parser_type[i];
 				return (SUCCESS_CODE);
 			}
-	if (!vars->game_screen.height)
-		vars->game_screen.width = 1280;
-	if (!vars->game_screen.width)
-		vars->game_screen.height = 800;
 	return (parser_check(vars, line));
 }
 
@@ -79,9 +76,11 @@ int	parse_config(t_list *cub, t_vars *vars)
 			return (MALLOC_ERROR);
 		if ((error = get_conf(vars, line)) != SUCCESS_CODE)
 			return (error);
+		if (!vars->game_screen.width)
+			vars->game_screen.width = 1280;
+		if (!vars->game_screen.height)
+			vars->game_screen.height = 800;
 		cub = cub->next;
-		free(line);
-		line = NULL;
 	}
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
