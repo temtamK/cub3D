@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/23 17:19:42 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/24 08:47:01 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 int	parser_check(t_vars *vars, char *line)
 {
-	if (!ft_strncmp(line, "R ", 2) && (vars->parser & PARSER_R))
-		return (RESOLUTION_ERROR);
-	else if (!ft_strncmp(line, "NO ", 3) && (vars->parser & PARSER_NO))
+	if (!ft_strncmp(line, "NO ", 3) && (vars->parser & PARSER_NO))
 		return (CONFIG_ERROR);
 	else if (!ft_strncmp(line, "SO ", 3) && (vars->parser & PARSER_SO))
 		return (CONFIG_ERROR);
@@ -42,10 +40,10 @@ int	get_conf(t_vars *vars, char *line)
 	int			i;
 
 	i = -1;
-	if (ft_strnstr(line, "R ", 2) && !(vars->parser & PARSER_R))
-		return (parse_resolution(line + 2, vars));
-	else if (ft_strnstr(line, "F ", 2) || !(vars->parser & PARSER_F)
-			|| ft_strnstr(line, "C ", 2) || !(vars->parser & PARSER_C))
+	vars->game_screen.width = 1280;
+	vars->game_screen.height = 800;
+	if (ft_strnstr(line, "F ", 2) || !(vars->parser & PARSER_F)
+		|| ft_strnstr(line, "C ", 2) || !(vars->parser & PARSER_C))
 		return (parse_color(line, vars));
 	else
 		while (text_type[++i])
@@ -61,7 +59,7 @@ int	get_conf(t_vars *vars, char *line)
 
 int	parse_config(t_list *cub, t_vars *vars)
 {
-	char	*line __attribute__((cleanup(free_str)));
+	char	*line	__attribute__((cleanup(free_str)));
 	int		error;
 
 	if (!cub || !vars)
@@ -75,11 +73,9 @@ int	parse_config(t_list *cub, t_vars *vars)
 			return (MALLOC_ERROR);
 		if ((error = get_conf(vars, line)) != SUCCESS_CODE)
 			return (error);
-		if (!vars->game_screen.width)
-			vars->game_screen.width = 1280;
-		if (!vars->game_screen.height)
-			vars->game_screen.height = 800;
 		cub = cub->next;
+		free(line);
+		line = NULL;
 	}
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
@@ -118,7 +114,7 @@ int	read_cub(char *path, t_list **alst)
 
 int	load_cub(char *path, t_vars *vars)
 {
-	t_list	*cub __attribute__((cleanup(free_cub)));
+	t_list *cub	__attribute__((cleanup(free_cub)));
 	int		len;
 	int		error;
 

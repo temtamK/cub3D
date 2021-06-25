@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/16 13:29:57 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/24 08:45:40 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,23 @@ void	map_size(t_map *map)
 
 int		duplicate_map(t_map *map)
 {
-	int	i;
+	int		i;
+	int		j;
 
 	if (!(map->tmp = malloc(sizeof(char *) * (map->y + 1))))
 		return (MALLOC_ERROR);
 	i = -1;
 	while (++i < map->y)
-		map->tmp[i] = ft_strdup(map->array[i]);
+	{
+		if (!(map->tmp[i] = malloc(sizeof(char *) * (map->x))))
+			return (MALLOC_ERROR);
+		j = -1;
+		while (map->array[i][++j])
+			map->tmp[i][j] = map->array[i][j];
+		while (j < map->x)
+			map->tmp[i][j++] = '0';
+		map->tmp[i][j] = '\0';
+	}
 	map->tmp[i] = NULL;
 	return (SUCCESS_CODE);
 }
