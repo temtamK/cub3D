@@ -6,12 +6,11 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/24 07:59:28 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/25 15:19:15 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include <stdio.h>
 
 int		check_surrounding(t_map *map, int x, int y)
 {

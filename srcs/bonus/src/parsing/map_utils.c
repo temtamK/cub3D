@@ -6,21 +6,21 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/24 08:45:40 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/25 15:13:04 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int		check_surrounding(t_map *map, int x, int y, char *find)
+int		check_surrounding(t_map *map, int x, int y)
 {
-	if (y > 0 && ft_strchr(find, map->array[y - 1][x]))
+	if (y > 0 && map->tmp[y + 1][x] == '\0')
 		return (0);
-	else if (x < (map->x - 2) && ft_strchr(find, map->array[y][x + 1]))
+	else if (x < (map->x - 2) && map->tmp[y][x + 1] == '\0')
 		return (0);
-	else if (y < (map->y - 2) && ft_strchr(find, map->array[y + 1][x]))
+	else if (y < (map->y - 2) && map->tmp[y + 1][x] == '\0')
 		return (0);
-	else if (x > 0 && ft_strchr(find, map->array[y][x - 1]))
+	else if (x > 0 && map->tmp[y][x + 1] == '\0')
 		return (0);
 	return (1);
 }

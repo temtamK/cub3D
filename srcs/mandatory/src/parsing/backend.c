@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/24 08:47:01 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/25 14:12:05 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	get_conf(t_vars *vars, char *line)
 
 int	parse_config(t_list *cub, t_vars *vars)
 {
-	char	*line	__attribute__((cleanup(free_str)));
+	char	*line __attribute__((cleanup(free_str)));
 	int		error;
 
 	if (!cub || !vars)
@@ -114,7 +114,7 @@ int	read_cub(char *path, t_list **alst)
 
 int	load_cub(char *path, t_vars *vars)
 {
-	t_list *cub	__attribute__((cleanup(free_cub)));
+	t_list	*cub __attribute__((cleanup(free_cub)));
 	int		len;
 	int		error;
 

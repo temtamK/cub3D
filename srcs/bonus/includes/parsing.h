@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 20:15:58 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/15 21:50:42 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/25 15:19:48 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		parse_color(char *line, t_vars *vars);
 **  Cub3D specific functions
 */
 void	map_size(t_map *map);
-int		check_surrounding(t_map *map, int x, int y, char *find);
+int		check_surrounding(t_map *map, int x, int y);
 int		duplicate_map(t_map *map);
 void	check_borders(t_map *map, int x, int y);
 int		find_spawn(t_map *map, t_spawn *spawn);
