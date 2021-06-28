@@ -6,11 +6,11 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:30:19 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/25 15:20:24 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 14:57:35 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/parsing.h"
 
 static int	format_map_line(char *line)
 {

@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 00:45:05 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/23 17:15:24 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 14:56:28 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "settings.h"
 
 # define VALID_CONF_IDS		"NSWEFC\n"
-# define VALID_MAP_CHARS	"012NSEW "
+# define VALID_MAP_CHARS	"01NSEW "
 # define CONF_FILE_EXTENSION ".cub"
 # define WIN_NAME "cub3D"
 # define STDERR 2

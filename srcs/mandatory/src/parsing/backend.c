@@ -6,7 +6,7 @@
 /*   By: taemkim <taemkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:10:43 by taemkim           #+#    #+#             */
-/*   Updated: 2021/06/25 14:12:05 by taemkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 14:38:58 by taemkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	get_conf(t_vars *vars, char *line)
 	i = -1;
 	vars->game_screen.width = 1280;
 	vars->game_screen.height = 800;
-	if (ft_strnstr(line, "F ", 2) || !(vars->parser & PARSER_F)
-		|| ft_strnstr(line, "C ", 2) || !(vars->parser & PARSER_C))
+	if ((ft_strnstr(line, "F ", 2) && !(vars->parser & PARSER_F))
+		|| (ft_strnstr(line, "C ", 2) && !(vars->parser & PARSER_C)))
 		return (parse_color(line, vars));
 	else
 		while (text_type[++i])
